@@ -111,6 +111,7 @@ class Database:
 
 # CSV File reader
 """
+HELPER Function: 
 This function reads data from a CSV file.
 """
 def readCSV(fileName="", skipfirst=False):
@@ -125,6 +126,9 @@ def readCSV(fileName="", skipfirst=False):
 DB = Database(host= HOST,
               user= USER, password= PASSWORD, database= DATABASE)
 
+"""
+This table stores the rental prices for books. Each record has a unique price_id and a rental_price.
+"""
 # Create Database 
 prices_table =  Table(
     name="Prices",
@@ -134,6 +138,10 @@ prices_table =  Table(
     ]
 )
 
+"""
+This table stores information about books, including their title, author, genre, publication year, and a 
+reference to their price_id in the Prices table. Each book has a unique book_id.
+"""
 books_table = Table(
     name= "Books",
     attrib= [
@@ -149,6 +157,11 @@ books_table = Table(
     ]
 )
 
+"""
+This table stores information about book rentals, including the book_id, member_id, rental_date, 
+due_date, and return_date. Each rental has a unique rental_id. The book_id is a foreign key referencing 
+the book_id in the Books table.
+"""
 rentals_table = Table(
     name= "Rentals",
     attrib= [
@@ -237,3 +250,4 @@ print("Return all rental record of a certain book:")
 for row in result_3:
     print(row)
 print()
+

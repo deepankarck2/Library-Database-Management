@@ -1,8 +1,4 @@
 # CSC 336 Project Instructions
-## Database Credential Setup:
-- Add a new `credentials.py` file,
-- Add credentials that has been shared 
-- Run `python Script.py`
 
 ## Environment setup:
 - On the root folder of this project run `python -m venv .venv`
@@ -13,3 +9,9 @@
   - Run `pip install -r requirements.txt` to make sure all requirements are installed.
 - **Run the python script.**
   - Once set up run the script and enjoy!
+
+## Database Credential Setup:
+- Add a new `credentials.py` file,
+- Add credentials that has been shared 
+- Run `python Script.py`
+

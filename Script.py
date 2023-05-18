@@ -62,7 +62,7 @@ class Database:
         statement += ",\n".join([f"{attribute.name} {attribute.type} {attribute.constraints}" for attribute in table.attrib])
         if len(table.foreign) > 0:
             statement += ", "
-            statement += ",\n".join([f"FOREIGN KEY ({key.name}) REFERENCES {key.table}({key.refer})" for key in table.foreign])
+            statement += ",\n".join([f"FOREIGN KEY ({key.name}) REFERENCES {key.table}({key.refer}) {key.constraints}" for key in table.foreign])
         if len(table.other) > 0:
             statement += ", "
             statement += ", ".join(table.other)            
@@ -108,6 +108,30 @@ class Database:
             query += f" WHERE {cond}"
         self.cursor.execute(query)
         return self.cursor.fetchall()
+    
+    # Delete from table
+    """
+    This method deletes data from a table.
+    """
+    def delete_from(self, table: Table, cond=""):
+        query = f"DELETE FROM {table.name}"
+        query += f" WHERE {cond}"
+        
+        self.cursor.execute(query)
+        self.db.commit()
+        print(self.cursor.rowcount, "row(s) affected.")
+    
+    # Update rows from a table
+    """
+    This method updates data from a table.
+    """
+    def update_on(self, table: Table, values = dict[str, str], cond=""):
+        query = f"UPDATE {table.name}"
+        query += f" SET {', '.join(f'{key} = {values[key]}' for key in values)}"
+        query += f" WHERE {cond}"
+        self.cursor.execute(query)
+        self.db.commit()
+        print(self.cursor.rowcount, "row(s) affected.")
 
 # CSV File reader
 """
@@ -251,3 +275,35 @@ for row in result_3:
     print(row)
 print()
 
+#Query 4
+print("Update rental_id 18 rental_date and return_date:")
+see_update_0 = DB.select_from(rentals_table, cond="rental_id = 20")
+print("Original:")
+for row in see_update_0:
+    print(row)
+
+print("Perform update:")
+new_values = {"rental_date" : "\'2011-01-01\'", "return_date" : "'2011-02-02'"}
+result_4 = DB.update_on(rentals_table, new_values, "rental_id = 20")
+
+see_update_0 = DB.select_from(rentals_table, cond="rental_id = 20")
+print("After update:")
+for row in see_update_0:
+    print(row)
+print()
+
+#Query 5
+print("Delete book_id = 5 from Books")
+see_update_1 = DB.select_from(books_table, cond="book_id = 5")
+print("Original:")
+for row in see_update_1:
+    print(row)
+
+print("Perform delete:")
+result_5 = DB.delete_from(books_table, "book_id = 5")
+
+see_update_1 = DB.select_from(books_table, cond="book_id = 5")
+print("After update:")
+for row in see_update_1:
+    print(row)
+print()

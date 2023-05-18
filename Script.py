@@ -276,34 +276,51 @@ for row in result_3:
 print()
 
 #Query 4
-print("Update rental_id 18 rental_date and return_date:")
-see_update_0 = DB.select_from(rentals_table, cond="rental_id = 20")
+print("Update book_id = 1 with \'New Genre\'")
+see_update_0 = DB.select_from(books_table, cond="book_id = 1")
 print("Original:")
 for row in see_update_0:
     print(row)
 
 print("Perform update:")
-new_values = {"rental_date" : "\'2011-01-01\'", "return_date" : "'2011-02-02'"}
-result_4 = DB.update_on(rentals_table, new_values, "rental_id = 20")
+new_values_0 = {"genre" : "\"New Genre\""}
+result_4 = DB.update_on(books_table, new_values_0, "book_id = 1")
 
-see_update_0 = DB.select_from(rentals_table, cond="rental_id = 20")
+see_update_0 = DB.select_from(books_table, cond="book_id = 1")
 print("After update:")
 for row in see_update_0:
     print(row)
 print()
 
 #Query 5
-print("Delete book_id = 5 from Books")
-see_update_1 = DB.select_from(books_table, cond="book_id = 5")
+print("Update rental_id 18 rental_date and return_date:")
+see_update_1 = DB.select_from(rentals_table, cond="rental_id = 20")
 print("Original:")
 for row in see_update_1:
     print(row)
 
-print("Perform delete:")
-result_5 = DB.delete_from(books_table, "book_id = 5")
+print("Perform update:")
+new_values_1 = {"rental_date" : "\'2011-01-01\'", "return_date" : "'2011-02-02'"}
+result_5 = DB.update_on(rentals_table, new_values_1, "rental_id = 20")
 
-see_update_1 = DB.select_from(books_table, cond="book_id = 5")
+see_update_1 = DB.select_from(rentals_table, cond="rental_id = 20")
 print("After update:")
 for row in see_update_1:
+    print(row)
+print()
+
+#Query 6
+print("Delete book_id = 5 from Books")
+see_update_2 = DB.select_from(books_table, cond="book_id = 5")
+print("Original:")
+for row in see_update_2:
+    print(row)
+
+print("Perform delete:")
+result_6 = DB.delete_from(books_table, "book_id = 5")
+
+see_update_2 = DB.select_from(books_table, cond="book_id = 5")
+print("After update:")
+for row in see_update_2:
     print(row)
 print()

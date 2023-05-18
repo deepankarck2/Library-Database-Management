@@ -12,6 +12,10 @@
 
 ## Database Credential Setup:
 - Add a new `credentials.py` file,
-- Add credentials that has been shared 
+- Add credentials that has been shared or use your local MySQL credentials: 
+<br><code>HOST= ""
+   USER= ""
+   PASSWORD= ""
+   DATABASE= ""</code> 
 - Run `python Script.py`
 
